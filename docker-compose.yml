@@ -1,0 +1,15 @@
+services:
+  fivem:
+    build: .
+    container_name: fivem-server
+    ports:
+      - "30120:30120/udp"
+      - "30120:30120/tcp"
+      - "40120:40120/tcp" # txAdmin
+    volumes:
+      - ./server-data:/app/server-data
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
+    restart: on-failure:3
